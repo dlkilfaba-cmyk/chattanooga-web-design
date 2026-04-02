@@ -1,7 +1,12 @@
 /* script.js – Portfolio interactivity */
 
+document.addEventListener('DOMContentLoaded', () => {
+
 // ── Year in footer ──────────────────────────────────────────────
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
 
 // ── Mobile nav toggle ───────────────────────────────────────────
 const toggle = document.querySelector('.nav__toggle');
@@ -54,3 +59,5 @@ document.querySelectorAll(
   el.style.animationDelay = (i * 0.08) + 's';
   el.classList.add('animate-in');
 });
+
+}); // end DOMContentLoaded

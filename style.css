@@ -104,6 +104,13 @@ ul { list-style: none; }
   font-size: 1.05rem;
 }
 
+.section__desc a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.section__desc a:hover { color: var(--clr-white); }
+
 .section__desc--light { color: var(--clr-muted); }
 
 .section__cta {
@@ -529,16 +536,69 @@ ul { list-style: none; }
   border-radius: var(--radius-md);
   padding: 2rem;
   position: relative;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
+
+html.js-animations #services .service-card:not(.service-card--visible) {
+  opacity: 0;
+  transform: translateY(32px);
+  pointer-events: none;
+}
+
+html.js-animations #services .service-card.service-card--visible {
+  animation: serviceReveal 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--service-stagger, 0s);
+  pointer-events: auto;
+}
+
+@keyframes serviceReveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes serviceRevealFeatured {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+html.js-animations #services .service-card.service-card--featured.service-card--visible {
+  animation-name: serviceRevealFeatured;
+}
+
 .service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+  border-color: rgba(79, 158, 255, 0.25);
 }
 
 .service-card--featured {
   border-color: var(--clr-accent);
   box-shadow: 0 0 0 1px var(--clr-accent);
+  transform: translateY(-2px);
+}
+
+.service-card--featured:hover {
+  transform: translateY(-8px);
+  border-color: var(--clr-accent);
+  box-shadow: 0 22px 56px rgba(79, 158, 255, 0.12);
 }
 
 .service-card__badge {
@@ -558,6 +618,12 @@ ul { list-style: none; }
 .service-card__icon {
   font-size: 2rem;
   margin-bottom: 1rem;
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-card:hover .service-card__icon {
+  transform: scale(1.08) translateY(-2px);
 }
 
 .service-card__title {
@@ -578,6 +644,8 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  flex-grow: 1;
+  margin-top: auto;
 }
 
 .service-card__list li {

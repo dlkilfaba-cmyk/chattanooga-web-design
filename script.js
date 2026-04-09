@@ -27,37 +27,53 @@ if (toggle && navLinks) {
   });
 }
 
-// ── Contact form – simple client-side feedback ──────────────────
+// ── Contact form – Formspree submission ─────────────────────
 const form = document.getElementById('contactForm');
 
 if (form) {
   form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
     const btn = form.querySelector('button[type="submit"]');
     const originalText = btn.textContent;
 
-    btn.textContent = '✅ Message Sent!';
+    btn.textContent = '⏳ Sending...';
     btn.disabled = true;
-    btn.style.opacity = '0.8';
-
+    
+    // Let form submit naturally to Formspree
     setTimeout(() => {
-      btn.textContent = originalText;
-      btn.disabled = false;
-      btn.style.opacity = '';
-      form.reset();
-    }, 3000);
+      btn.textContent = '✅ Message Sent!';
+      btn.style.opacity = '0.8';
+    }, 500);
   });
 }
 
-// ── Staggered fade-in animation ──────────────────────────────────
-// Elements remain visible by default. Animation class is additive —
-// it plays over the already-rendered content, so no opacity:0 flash.
-document.querySelectorAll(
-  '.project-card, .service-card'
-).forEach((el, i) => {
+// ── Project cards: subtle stagger on load ─────────────────────
+document.querySelectorAll('.project-card').forEach((el, i) => {
   el.style.animationDelay = (i * 0.08) + 's';
   el.classList.add('animate-in');
 });
+
+// ── Service cards: scroll-in with stagger (see html.js-animations in CSS) ──
+const serviceCards = document.querySelectorAll('#services .service-card');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canScrollAnimate =
+  serviceCards.length && !reduceMotion && 'IntersectionObserver' in window;
+
+if (canScrollAnimate) {
+  document.documentElement.classList.add('js-animations');
+  serviceCards.forEach((card, i) => {
+    card.style.setProperty('--service-stagger', `${i * 0.11}s`);
+  });
+  const io = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('service-card--visible');
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -32px 0px' }
+  );
+  serviceCards.forEach((card) => io.observe(card));
+}
 
 }); // end DOMContentLoaded

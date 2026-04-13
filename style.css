@@ -643,8 +643,8 @@ html.js-animations #services .service-card.service-card--featured.service-card--
 .service-card__list {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;  flex-grow: 1;
-  margin-top: auto;}
+  gap: 0.4rem;
+}
 
 .service-card__list li {
   font-size: 0.875rem;

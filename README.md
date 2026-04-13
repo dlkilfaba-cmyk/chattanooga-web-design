@@ -1,4 +1,4 @@
-https://github.com/dlkilfaba-cmyk/chattanooga-web-design
+https://dlkilfaba-cmyk.github.io/chattanooga-web-design/
 # Darren Knuckles — Portfolio Website
 
 **Frontend Developer & Web Designer** | Chattanooga, TN

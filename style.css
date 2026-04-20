@@ -406,7 +406,7 @@ ul { list-style: none; }
 /* ── PROJECT CARDS ───────────────────────────────────────────── */
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -460,6 +460,45 @@ ul { list-style: none; }
 }
 .project-card__img--3::after {
   content: '💅';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+}
+
+.project-card__img--4 {
+  background: linear-gradient(135deg, #2d4a1e 0%, #1a3010 50%, #243818 100%);
+}
+.project-card__img--4::after {
+  content: '🌾';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+}
+
+.project-card__img--5 {
+  background: linear-gradient(135deg, #3d2a5c 0%, #1e1533 50%, #2a1f45 100%);
+}
+.project-card__img--5::after {
+  content: '📚';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+}
+
+.project-card__img--6 {
+  background: linear-gradient(135deg, #0f766e 0%, #0d4f4a 50%, #134e4a 100%);
+}
+.project-card__img--6::after {
+  content: '⚡';
   position: absolute;
   inset: 0;
   display: flex;
@@ -884,6 +923,10 @@ html.js-animations #services .service-card.service-card--featured.service-card--
 
 @media (max-width: 640px) {
   :root { --section-py: 3rem; }
+
+  .projects {
+    grid-template-columns: 1fr;
+  }
 
   .nav__links { display: none; }
   .nav__links.is-open {
